@@ -49,7 +49,8 @@
       "@testing-library/jest-dom"
     ],
     "transform": {
-      "^.+\\.jsx?$": "babel-jest"
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.tsx?$": "babel-jest"
     }
   }
 }
