@@ -1,0 +1,7 @@
+[
+  {
+    "origin": ["gs://ecommerce-store-74aaa.firebasestorage.app"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+]
