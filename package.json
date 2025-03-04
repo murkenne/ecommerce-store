@@ -20,12 +20,14 @@
     "react-dom": "^18.3.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.3",
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@babel/core": "^7.26.8",
     "@babel/preset-env": "^7.26.8",
     "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
     "@eslint/js": "^9.17.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -47,7 +49,8 @@
   "jest": {
     "testEnvironment": "jest-environment-jsdom",
     "setupFilesAfterEnv": [
-      "@testing-library/jest-dom"
+      "@testing-library/jest-dom",
+      "<rootDir>/jest.setup.ts"
     ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest",
@@ -55,7 +58,9 @@
     },
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}",
+      "**/__test__/**/*.test.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[tj]s?(x)"
     ]
   }
 }
