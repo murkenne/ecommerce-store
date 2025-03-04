@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { setUser, setError, setLoading } from '../store/authSlice';
@@ -15,7 +14,7 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(setLoading(true));
-    
+
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       dispatch(setUser({
@@ -37,8 +36,9 @@ export default function Login() {
               <h2 className="text-center mb-4">Login</h2>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label className="form-label">Email</label>
+                  <label htmlFor="email" className="form-label">Email</label>
                   <input
+                    id="email"
                     type="email"
                     className="form-control"
                     value={email}
@@ -47,8 +47,9 @@ export default function Login() {
                   />
                 </div>
                 <div className="mb-3">
-                  <label className="form-label">Password</label>
+                  <label htmlFor="password" className="form-label">Password</label>
                   <input
+                    id="password"
                     type="password"
                     className="form-control"
                     value={password}
