@@ -11,11 +11,21 @@ export default function Navigation() {
   const { items } = useSelector((state: RootState) => state.cart);
   const auth = getAuth(); // Get Firebase Auth instance
 
-  const { data: categories } = useQuery({
+  const { data: categories = [], isError: categoriesError, isLoading: categoriesLoading } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
-      const response = await fetch('https://fakestoreapi.com/products/categories');
-      return response.json();
+      try {
+        const response = await fetch('https://fakestoreapi.com/products/categories');
+        if (!response.ok) {
+          throw new Error('Failed to fetch categories');
+        }
+        const data = await response.json();
+        console.log('Fetched categories:', data);
+        return data;
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+        return [];
+      }
     }
   });
 
@@ -48,11 +58,15 @@ export default function Navigation() {
           onChange={handleCategoryChange}
         >
           <option value="all">All Categories</option>
-          {categories?.map((category: string) => (
-            <option key={category} value={category}>
-              {category.charAt(0).toUpperCase() + category.slice(1)}
-            </option>
-          ))}
+          {Array.isArray(categories) && categories.length > 0 ? (
+            categories.map((category: string) => (
+              <option key={category} value={category}>
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </option>
+            ))
+          ) : (
+            <option disabled>No categories available</option>
+          )}
         </select>
         <div className="d-flex">
           <Link to="/cart" className="btn btn-outline-primary me-2">

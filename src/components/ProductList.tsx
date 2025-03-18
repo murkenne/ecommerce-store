@@ -88,9 +88,19 @@ export default function ProductList() {
 
   if (isLoading) return <div>Loading...</div>;
 
-  const filteredProducts = category
+  console.log("All products:", products);
+  console.log("Current category:", category);
+
+  const filteredProducts = category && category !== 'all'
     ? products?.filter(product => product.category === category)
     : products;
+  
+  console.log("Filtered products:", filteredProducts);
+
+  // Add an alert if no products found for a category
+  if (category && filteredProducts?.length === 0) {
+    console.warn(`No products found for category: ${category}`);
+  }
 
   return (
     <>
@@ -117,6 +127,7 @@ export default function ProductList() {
               value={newProduct.price}
               onChange={e => setNewProduct({ ...newProduct, price: Number(e.target.value) })}
             />
+            Price
           </div>
           <div className="col">
             <input
@@ -126,6 +137,7 @@ export default function ProductList() {
               value={newProduct.stock}
               onChange={e => setNewProduct({ ...newProduct, stock: Number(e.target.value) })}
             />
+            Quantity
           </div>
           <div className="col">
             <input
