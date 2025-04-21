@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { db } from "../firebaseConfig";
+import { db } from "../../firebaseConfig"; // Fixed path
 import { collection, getDocs } from "firebase/firestore";
 
 const TestFirestore: React.FC = () => {

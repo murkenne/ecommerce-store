@@ -3,15 +3,15 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
 import { getAuth, signOut } from 'firebase/auth';
-import { setUser } from '../store/authSlice'; // Ensure this action is correctly imported
+import { setUser } from '../store/authSlice';
 
 export default function Navigation() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { items } = useSelector((state: RootState) => state.cart);
-  const auth = getAuth(); // Get Firebase Auth instance
+  const auth = getAuth();
 
-  const { data: categories = [], isError: categoriesError, isLoading: categoriesLoading } = useQuery({
+  const { data: categories = [] } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
       try {
@@ -40,9 +40,9 @@ export default function Navigation() {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Sign out the user
-      dispatch(setUser(null)); // Dispatch user logout action
-      navigate('/login'); // Redirect to login page after logout
+      await signOut(auth);
+      dispatch(setUser(null));
+      navigate('/login');
     } catch (error) {
       console.error('Logout failed:', error);
     }
